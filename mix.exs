@@ -9,7 +9,12 @@ defmodule MixCaramel.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "mix_caramel",
-      description: "Compile OCaml code with mix using Caramel"
+      description: "Compile OCaml code with mix using Caramel",
+      package: [
+        maintainers: ["Calin Capitanu","James Russo"],
+        licenses: ["Apache-2.0"],
+        links: %{"GitHub" => "https://github.com/AbstractMachinesLab/mix_caramel"}
+      ]
     ]
   end
 
@@ -21,6 +26,7 @@ defmodule MixCaramel.MixProject do
 
   defp deps do
     [
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 end

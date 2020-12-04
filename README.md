@@ -27,7 +27,7 @@ Also, in your `mix.exs` file, don't forget to add it as a compiler and source th
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       compilers: [:caramel] ++ Mix.compilers(),
-      caramelc_paths: ["path/to/ml_files"]
+      erlc_paths: ["src", "gen/src"]
     ]
   end
 
