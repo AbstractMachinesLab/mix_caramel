@@ -3,7 +3,7 @@ defmodule Mix.Tasks.Compile.Caramel do
 
   def run(_) do
     project = Mix.Project.config()
-    source_paths = project[:caramelc_paths]
+    source_paths = project[:caramel_paths]
     Mix.Compilers.Erlang.assert_valid_erlc_paths(source_paths)
     files = Mix.Utils.extract_files(source_paths, [:ml, :mli])
     run_caramel(files)
