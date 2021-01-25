@@ -1,6 +1,6 @@
 # Mix Caramel
 
-A Mix plugin for compiling OCaml files in an existing Mix Project using [caramelc](https://github.com/AbstractMachinesLab/caramel).
+A Mix plugin for compiling OCaml files in an existing Mix Project using [caramel](https://github.com/AbstractMachinesLab/caramel).
 
 ## Installation
 
@@ -27,7 +27,7 @@ Also, in your `mix.exs` file, don't forget to add it as a compiler and source th
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       compilers: [:caramel] ++ Mix.compilers(),
-      caramelc_paths: ["path/to/ml_files"]
+      caramel_paths: ["path/to/ml_files"]
     ]
   end
 

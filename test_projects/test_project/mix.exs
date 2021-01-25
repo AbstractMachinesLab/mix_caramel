@@ -9,7 +9,7 @@ defmodule TestProject.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       compilers: [:caramel] ++ Mix.compilers(),
-      caramelc_paths: ["src"]
+      caramel_paths: ["src"]
     ]
   end
 
