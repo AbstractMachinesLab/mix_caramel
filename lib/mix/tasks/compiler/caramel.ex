@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Compile.Caramel do
 
   def run_caramel(files) do
     Mix.Shell.cmd(
-      "caramelc compile " <> Enum.join(files, " "),
+      "caramel compile " <> Enum.join(files, " "),
       [],
       (fn res -> IO.puts(res) end)
     )
