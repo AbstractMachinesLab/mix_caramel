@@ -5,11 +5,11 @@ defmodule MixCaramel.MixProject do
     [
       app: :mix_caramel,
       version: "0.1.0",
-      elixir: "~> 1.11",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "mix_caramel",
-      description: "Compile OCaml code with mix using Caramel"
+      description: "Use Caramel code in your Elixir projects"
     ]
   end
 
