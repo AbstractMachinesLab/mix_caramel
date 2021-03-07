@@ -1,40 +1,61 @@
-# Mix Caramel
+# `mix_caramel`
 
-A Mix plugin for compiling OCaml files in an existing Mix Project using [caramel](https://github.com/AbstractMachinesLab/caramel).
+Drop-in plugin to start writing [Caramel](https://caramel.run) code in your
+Elixir projects.
+
+## Features
+
+* Handles per-project installation of the Caramel compiler
+* Integrates into the existing compilation flows: `mix compile`
+* Type-check directly from `iex` when running `recompile`
+* Easy autoformatting of sources: `mix caramel.fmt`
+* Fast manual-type checking with `mix caramel.check`
+
+```sh
+λ mix compile
+==> mix_caramel
+Compiling 1 file (.ex)
+📦 Installing Caramel v0.1.1...
+🍬 Using Caramel v0.1.1
+Compiling todo.erl      OK
+
+==> hello_world
+Compiling 1 file (.erl)
+Compiling 14 files (.ex)
+λ mix caramel
+
+Available tasks:
+
+mix caramel.check # Type-check all Caramel modules in this project
+mix caramel.fmt   # Format all Caramel files in this project
+λ mix caramel.check
+Compiling todo.erl      OK
+
+λ mix caramel.fmt
+💅🏽 formatted 1 files (.ml, .mli, .re, .rei)
+```
 
 ## Installation
 
-The package can be added to your project through the dependency list in `mix.exs`:
+The package can be added to your project through the dependency list in
+`mix.exs`, and you need to tell it what version of Caramel you want to run and
+where to look for the Caramel sources.
 
 ```elixir
 def deps do
+  [{:mix_caramel, git: "https://github.com/AbstractMachinesLab/mix_caramel"}]
+end
+
+def project do
   [
-	{:mix_caramel, git: "https://github.com/AbstractMachinesLab/mix_caramel"}
+    app: :test_project,
+    version: "0.1.0",
+    elixir: "~> 1.11",
+    start_permanent: Mix.env() == :prod,
+    deps: deps(),
+    compilers: [:caramel] ++ Mix.compilers(),
+    caramel_paths: ["src"],
+    caramel_version: "v0.1.1"
   ]
 end
 ```
-
-
-Also, in your `mix.exs` file, don't forget to add it as a compiler and source the path to where your `.ml` files are.
-
-```elixir
-
-  def project do
-    [
-      app: :test_project,
-      version: "0.1.0",
-      elixir: "~> 1.11",
-      start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      compilers: [:caramel] ++ Mix.compilers(),
-      caramel_paths: ["path/to/ml_files"]
-    ]
-  end
-
-```
-
-## Usage
-
-When running `mix compile`, caramelc will automatically run on the specified folder, but will then place all the erlang modules in a `src/`.
-
-You can then run `iex -S mix` in the root directory of your project to have all the elixir AND caramel-built erlang modules in your interactive elixir shell.
