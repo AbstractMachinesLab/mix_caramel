@@ -55,7 +55,7 @@ def project do
     deps: deps(),
     compilers: [:caramel] ++ Mix.compilers(),
     caramel_paths: ["src"],
-    caramel_version: "v0.1.1"
+    caramel_release: "v0.1.1"
   ]
 end
 ```
