@@ -43,7 +43,7 @@ where to look for the Caramel sources.
 
 ```elixir
 def deps do
-  [{:mix_caramel, git: "https://github.com/AbstractMachinesLab/mix_caramel"}]
+  [{:mix_caramel, git: "https://github.com/AbstractMachinesLab/mix_caramel", branch: :main}]
 end
 
 def project do

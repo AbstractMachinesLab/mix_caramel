@@ -14,5 +14,4 @@ defmodule Mix.Tasks.Caramel.Fmt do
     :ok = Caramel.format(files)
     IO.puts("💅🏽 formatted #{Enum.count(files)} files (.ml, .mli, .re, .rei)")
   end
-
 end

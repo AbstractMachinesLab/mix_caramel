@@ -1,14 +1,14 @@
 defmodule Caramel.Installer do
-
   def get_host_triplet() do
     case :os.type() do
-      {:unix, :linux } -> "x86_64-unknown-linux-gnu"
-      {:unix, _ } -> "x86_64-apple-darwin"
+      {:unix, :linux} -> "x86_64-unknown-linux-gnu"
+      {:unix, _} -> "x86_64-apple-darwin"
     end
   end
 
   def release_url(version, tarball_name) do
-    "https://github.com/AbstractMachinesLab/caramel/releases/download/" <> version <> "/" <> tarball_name
+    "https://github.com/AbstractMachinesLab/caramel/releases/download/" <>
+      version <> "/" <> tarball_name
   end
 
   def tarball_name(version, host_triplet) do
@@ -17,10 +17,10 @@ defmodule Caramel.Installer do
 
   def download_caramel(version, tarball_name, release_url) do
     IO.puts("📦 Installing Caramel #{version}...")
-    Mix.Shell.cmd("wget " <> release_url, [], (fn _ -> :ok  end))
-    Mix.Shell.cmd("tar -xzf " <> tarball_name, [], (fn _ -> :ok  end))
-    Mix.Shell.cmd("rm " <> tarball_name, [], (fn _ -> :ok  end))
-    Mix.Shell.cmd("mv caramel _build/", [], (fn _ -> :ok end))
+    Mix.Shell.cmd("wget " <> release_url, [], fn _ -> :ok end)
+    Mix.Shell.cmd("tar -xzf " <> tarball_name, [], fn _ -> :ok end)
+    Mix.Shell.cmd("rm " <> tarball_name, [], fn _ -> :ok end)
+    Mix.Shell.cmd("mv caramel _build/", [], fn _ -> :ok end)
   end
 
   def install(version) do
@@ -29,5 +29,4 @@ defmodule Caramel.Installer do
     release_url = release_url(version, tarball_name)
     download_caramel(version, tarball_name, release_url)
   end
-
 end

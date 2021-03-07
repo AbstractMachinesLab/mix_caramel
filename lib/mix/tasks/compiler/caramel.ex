@@ -10,5 +10,4 @@ defmodule Mix.Tasks.Compile.Caramel do
     files = Mix.Utils.extract_files(source_paths, [:ml, :mli, :re, :rei])
     :ok = Caramel.compile(files)
   end
-
 end

@@ -8,6 +8,7 @@ defmodule Caramel do
     if !File.exists?(@caramel_bin) do
       Caramel.Installer.install(version)
     end
+
     IO.puts("🍬 Using Caramel #{version}")
   end
 
@@ -15,24 +16,25 @@ defmodule Caramel do
     Mix.Shell.cmd(
       "#{@caramel_bin} compile " <> Enum.join(files, " "),
       [],
-      (fn res -> IO.puts(res) end)
+      fn res -> IO.puts(res) end
     )
+
     Mix.Shell.cmd(
       "mv *.erl src",
       [],
-      (fn _ -> :ok  end)
+      fn _ -> :ok end
     )
+
     :ok
   end
-
 
   def format(files) do
     Mix.Shell.cmd(
       "#{@caramel_bin} fmt " <> Enum.join(files, " "),
       [],
-      (fn res -> IO.puts(res) end)
+      fn res -> IO.puts(res) end
     )
+
     :ok
   end
-
 end
