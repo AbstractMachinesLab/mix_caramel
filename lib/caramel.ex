@@ -12,6 +12,7 @@ defmodule Caramel do
     IO.puts("🍬 Using Caramel #{version}")
   end
 
+  def compile([]), do: :ok
   def compile(files) do
     Mix.Shell.cmd(
       "#{@caramel_bin} compile " <> Enum.join(files, " "),
