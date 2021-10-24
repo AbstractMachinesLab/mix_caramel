@@ -12,16 +12,32 @@ defmodule Caramel do
     IO.puts("🍬 Using Caramel #{version}")
   end
 
-  def compile([]), do: :ok
-  def compile(files) do
+  def compile(files, opts \\ [])
+  def compile([], _opts), do: :ok
+  def compile(files, opts) do
+    bin = Path.expand(@caramel_bin)
     Mix.Shell.cmd(
-      "#{@caramel_bin} compile " <> Enum.join(files, " "),
-      [],
+      "#{bin} compile " <> Enum.join(files, " "),
+      opts,
       fn res -> IO.puts(res) end
     )
 
+    target_dir = Path.join(opts[:cd] || ".", "src")
+
+    if not File.dir?(target_dir) do
+      Mix.raise "caramel: target dir `#{target_dir}` is not a diretory"
+    end
+
+
+    # move the given files to target directory
+    basedir = Path.dirname(target_dir)
+    erlfiles =
+      for file <- files do
+        Path.join(basedir, Path.basename(file, Path.extname(file)) <> ".erl")
+      end
+
     Mix.Shell.cmd(
-      "mv *.erl src",
+      "mv #{Enum.join(erlfiles, " ")} #{target_dir}",
       [],
       fn _ -> :ok end
     )
