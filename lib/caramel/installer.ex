@@ -18,6 +18,11 @@ defmodule Caramel.Installer do
   def download_caramel(version, tarball_name, release_url) do
     IO.puts("📦 Installing Caramel #{version}...")
     Mix.Shell.cmd("wget " <> release_url, [], fn _ -> :ok end)
+
+    if not File.exists?(tarball_name) do
+      Mix.raise("carmel: failed to download release tarball for #{version}.")
+    end
+
     Mix.Shell.cmd("tar -xzf " <> tarball_name, [], fn _ -> :ok end)
     Mix.Shell.cmd("rm " <> tarball_name, [], fn _ -> :ok end)
     Mix.Shell.cmd("mv caramel _build/", [], fn _ -> :ok end)
